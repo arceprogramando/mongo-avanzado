@@ -1,0 +1,58 @@
+<div class="container h-100">
+  <div class="row h-100">
+    <div class="col-md-4 my-auto">
+      <form class="card card-body rounded-0" id="noteForm">
+        <h1 class="h3 mb-5">Agrega un producto</h1>
+        <div class="form-group">
+          <label for="title">Titulo:</label>
+          <input type="text" id="title" name="title" placeholder="Escribe el titulo" class="form-control rounded-0 mb-3" required>
+        </div>
+        <div class="form-group">
+          <label for="price">Precio:</label>
+          <input type="text" id="price" name="price" placeholder="Ingresa el precio" class="form-control rounded-0 mb-3" required>
+        </div>
+        <div class="form-group">
+          <label for="status">Status:</label>
+          <select name="status" id="status" class="form-control rounded-0 mb-3" >
+            <option value="true">true</option>
+            <option value="false">false</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="stock">Stock:</label>
+          <input type="number" id="stock" name="stock" min="0" placeholder="Ingresa la cantidad de stock" class="form-control rounded-0 mb-3" required>
+        </div>
+        <div class="form-group">
+          <input type="file" name="image" class=" rounded-0 mb-3">
+        </div>
+        <button class="btn btn-dark rounded-0" >Enviar</button>
+      </form>
+    </div>
+    <div class="col-md-8 py-3">
+      <div id="notes">
+        <div>
+          {{#each products}}
+          <div>
+            <div class="card card-body rounded-0 mb-2 animate__animated animate__fadeInUp">
+              <div class="d-flex justify-content-between">
+                <h1 class="h3 card-title">{{this.title}}</h1>
+                <p class="h5">${{this.price}}</p>
+                <div>
+                  <button class="btn btn-danger delete" data-id="{{this.code}}">delete</button>
+                  <button class="btn btn-secondary update" data-id="{{this.code}}">update</button>
+                </div>
+              </div>
+              <p>{{this.description}}</p> 
+            </div>
+          </div>
+          {{else}}
+          <p>No hay productos disponibles.</p>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/index.js"></script>
