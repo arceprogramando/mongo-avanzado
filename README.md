@@ -73,6 +73,7 @@ Para realizar este Ejercicio
 - [bootstrap] - Para poder hacer mi representacion en handlebars un poco mas atractiva
 - [cross-env] - Para ejecutar scripts que establecen y utilizan variables de entorno en diferentes plataformas
 - [dotenv] - para cargar variables de entorno desde archivos de configuración locales.
+- [mongoose-paginate-v2] - para controlar la paginacion de el proyecto
 
 ## Installation
 
@@ -180,8 +181,7 @@ npm install express-routemap
 
 ```
 
-
-
+para la segunda preentrega se agrego [mongoose-paginate-v2](https://www.npmjs.com/package/mongoose-paginate-v2)
 ```
 http://localhost:8080/
 http://localhost:8080/products
@@ -207,3 +207,4 @@ http://localhost:8080/products/:id
   [cross-env]:<https://www.npmjs.com/package/cross-env>
   [express-routemap]:<https://www.npmjs.com/package/express-routemap>
   [bootstrap]:<https://getbootstrap.com>
+  [mongoose-paginate-v2]:<https://www.npmjs.com/package/mongoose-paginate-v2>
