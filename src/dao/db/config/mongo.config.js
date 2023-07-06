@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import configObject from '../config/config.js';
+import configObject from '../../../config/config.js';
 
 const {
   DB_CNN, DB_HOST, DB_PORT, DB_NAME,
@@ -15,16 +15,17 @@ const configConnection = {
 
 const mongoDBConnection = async () => {
   try {
-    // eslint-disable-next-line no-console
-    console.log(configConnection.url);
-    await mongoose.connect(configConnection.url, configConnection.options);
+    await mongoose.connect(
+      configConnection.url,
+      configConnection.options,
+    );
     // eslint-disable-next-line no-console
     console.log(
       `======= URL: ${configConnection.url.substring(0, 20)} =======`,
     );
   } catch (error) {
   // eslint-disable-next-line no-console
-    console.log(`🚀 ~ file: mongo.config.js:23 ~ mongoDBConnection ~ err:, ${error}`);
+    console.log(`🚀 ~ file: mongo.config.js:28 ~ mongoDBConnection ~ err:, ${error}`);
   }
 };
 

@@ -1,19 +1,17 @@
-document.getElementById('noteForm').addEventListener('submit', async (event) => {
-  event.preventDefault(); // Evitar que el formulario se envíe automáticamente
+// Cliente
+import { Socket } from 'socket.io';
 
-  const form = event.target; // Obtener el formulario
+const io = Socket();
 
-  const titleInput = document.getElementById('title');
-  const priceInput = document.getElementById('price');
-  const statusSelect = document.getElementById('status');
-  const stockInput = document.getElementById('stock');
+io.emit('message', '!Hola, me estoy conectando desde un el cliente');
 
-  const formData = new FormData();
-  formData.append('title', titleInput.value);
-  formData.append('price', priceInput.value);
-  formData.append('status', statusSelect.value);
-  formData.append('stock', stockInput.value);
+document.getElementById('noteForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
 
+  const form = e.target;
+  const formData = new FormData(form);
+  // eslint-disable-next-line no-console
+  console.log(formData);
   try {
     const response = await fetch('/api/products', {
       method: 'POST',
@@ -21,14 +19,21 @@ document.getElementById('noteForm').addEventListener('submit', async (event) => 
     });
 
     if (response.ok) {
-      // La solicitud se realizó con éxito
       const data = await response.json();
-      console.log(data); // Hacer algo con la respuesta del servidor
+
+      io.emit('nuevoProducto', data);
+
+      form.reset();
+
+      // eslint-disable-next-line no-undef
+      Swal.fire('Éxito', 'El producto se agregó correctamente', 'success');
     } else {
-      // La solicitud no se completó correctamente
-      console.log('Error al realizar la solicitud:', response.status);
+      throw new Error('Error al enviar el formulario');
     }
   } catch (error) {
-    console.log('Error de red:', error);
+    // eslint-disable-next-line no-console
+    console.log(error);
+    // eslint-disable-next-line no-undef
+    Swal.fire('Error', 'Hubo un problema al agregar el producto', 'error');
   }
 });

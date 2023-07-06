@@ -1,5 +1,14 @@
 <div>
-  {{#each products}}
+  
+  <p>Mis endpoints api son</p>
+
+    <p>Products: <a href="http://localhost:{{port}}/api/products">products</a></p>
+    <p>Carts: <a href="http://localhost:{{port}}/api/carts">carts</a></p>
+
+    <p>RealTimeProducts <a href="http://localhost:{{port}}/realtimeproducts">RealTimeProducts</a></p>
+    <p>chat <a href="http://localhost:{{port}}/chat">Chat</a></p>
+
+    {{#each products}}
     <div>
       <p>{{this.title}}</p>
       <p>{{this.description}}</p>
@@ -9,12 +18,6 @@
   {{else}}
     <p>No hay productos disponibles.</p>
   {{/each}}
-  <p>Mis endpoints api son</p>
-
-    <p>Products: <a href="http://localhost:{{port}}/api/products">products</a></p>
-    <p>Carts: <a href="http://localhost:{{port}}/api/carts">carts</a></p>
-
-    <p>RealTimeProducts <a href="http://localhost:{{port}}/realtimeproducts">RealTimeProducts</a></p>
 </div>
 
 

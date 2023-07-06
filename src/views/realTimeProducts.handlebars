@@ -1,40 +1,53 @@
 <div class="container h-100">
   <div class="row h-100">
     <div class="col-md-4 my-auto">
-      <form class="card card-body rounded-0" id="noteForm">
-        <h1 class="h3 mb-5">Agrega un producto</h1>
+      <form class="card card-body rounded-0" id="noteForm" action="/api/products" method="POST" enctype="multipart/form-data">
+        <h1 class="h3 mb-">Agrega un producto</h1>
         <div class="form-group">
           <label for="title">Titulo:</label>
-          <input type="text" id="title" name="title" placeholder="Escribe el titulo" class="form-control rounded-0 mb-3" required>
+          <input type="text" id="title" name="title" placeholder="Escribe el titulo" class="form-control rounded-0 mb-1" required>
+        </div>
+        <div class="form-group">
+          <label for="title">descripcion:</label>
+          <input type="text" id="description" name="description" placeholder="Escribe el titulo" class="form-control rounded-0 mb-1" required>
+        </div>
+        <div class="form-group">
+          <label for="code">Código:</label>
+          <input type="text" id="code" name="code" placeholder="Ingresa el código" class="form-control rounded-0 mb-1" required>
         </div>
         <div class="form-group">
           <label for="price">Precio:</label>
-          <input type="text" id="price" name="price" placeholder="Ingresa el precio" class="form-control rounded-0 mb-3" required>
+          <input type="number" id="price" name="price" placeholder="Ingresa el precio" class="form-control rounded-0 mb-1" required>
         </div>
         <div class="form-group">
           <label for="status">Status:</label>
-          <select name="status" id="status" class="form-control rounded-0 mb-3" >
+          <select name="status" id="status" class="form-control rounded-0 mb-1" >
             <option value="true">true</option>
             <option value="false">false</option>
           </select>
         </div>
         <div class="form-group">
           <label for="stock">Stock:</label>
-          <input type="number" id="stock" name="stock" min="0" placeholder="Ingresa la cantidad de stock" class="form-control rounded-0 mb-3" required>
+          <input type="number" id="stock" name="stock" min="0" placeholder="Ingresa la cantidad de stock" class="form-control rounded-0 mb-1" required>
         </div>
         <div class="form-group">
-          <input type="file" name="image" class=" rounded-0 mb-3">
+          <label for="category">Categoría:</label>
+          <input type="text" id="category" name="category" placeholder="Ingresa la categoría" class="form-control rounded-0 mb-1" required>
+        </div>
+        <div class="form-group">
+          <label for="image">Imagen:</label>
+          <input type="file" id="image" name="image" accept="image/*" class="form-control rounded-0 mb-1" required>
         </div>
         <button class="btn btn-dark rounded-0" >Enviar</button>
       </form>
     </div>
-    <div class="col-md-8 py-3">
+    <div class="col-md-8 py-3 overflow-auto max-heigth">
       <div id="notes">
         <div>
           {{#each products}}
-          <div>
-            <div class="card card-body rounded-0 mb-2 animate__animated animate__fadeInUp">
-              <div class="d-flex justify-content-between">
+          <div class="">
+            <div class="card card-body rounded-2 mb-2 animate__animated animate__fadeInUp background">
+              <div class="d-flex justify-content-between  ">
                 <h1 class="h3 card-title">{{this.title}}</h1>
                 <p class="h5">${{this.price}}</p>
                 <div>
@@ -43,6 +56,7 @@
                 </div>
               </div>
               <p>{{this.description}}</p> 
+              <img src="{{this.thumbnails}}" alt="Product Image" class="image">
             </div>
           </div>
           {{else}}
@@ -54,5 +68,6 @@
   </div>
 </div>
 
+<script src="/socket.io/socket.io.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/js/index.js"></script>
