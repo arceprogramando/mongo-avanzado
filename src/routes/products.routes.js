@@ -1,10 +1,32 @@
+/* eslint-disable max-len */
 import { Router } from 'express';
 import productModel from '../dao/models/products.models.js';
 import uploadMiddleware from '../services/uploader.js';
+// import productData from '../data/products.js';
 
 const router = Router();
 
 // Creacion Create ("C".R.U.D)
+
+// Aca esta la forma en la cual hice la insercion con mockaro siguiendo la prueba del profesor. Cree otra base de datos desde el .env
+
+// router.get('/insertion', async (req, res) => {
+//   try {
+//     const result = await productModel.insertMany(productData);
+
+//     return res.json({
+//       message: 'bulk insertion successfully',
+//       students: result,
+//     });
+//   } catch (error) {
+//     // eslint-disable-next-line no-console
+//     console.log(
+//       '🚀 ~ file: students.routes.js:19 ~ router.get ~ error:',
+//       error,
+//     );
+//     return res.status(500).send({ status: 'error', error: 'Error al enviar la insercion de productos' });
+//   }
+// });
 
 router.post('/api/products', uploadMiddleware, async (req, res) => {
   try {
