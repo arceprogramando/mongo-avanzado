@@ -20,13 +20,11 @@ router.get('/', async (req, res) => {
 
 router.get('/realtimeproducts', async (req, res) => {
   try {
-    const { page = 1 } = req.query;
+    const { page = 1, limit = 10 } = req.query;
 
     const {
       docs, hasPrevPage, hasNextPage, nextPage, prevPage,
-    } = await productModel.paginate({}, { limit: 10, page, lean: true });
-
-    // Aqui envio mis products
+    } = await productModel.paginate({}, { limit, page, lean: true });
 
     res.render('realTimeProducts', {
       products: docs,
