@@ -36,8 +36,6 @@ Estoy haciendo esto para poder tener un ejemplo de como hacer un readme a la hor
 - demás, crear una vista “realTimeProducts.handlebars”, la cual vivirá en el endpoint “/realtimeproducts” en nuestro views router, ésta contendrá la misma lista de productos, sin embargo, ésta trabajará con websockets. ✔️
 - Uso de sweetalert✔️
 - Si se desea hacer la conexión de socket emits con HTTP, deberás buscar la forma de utilizar el servidor io de Sockets dentro de la petición POST. ¿Cómo utilizarás un emit dentro del POST?(sin terminar)
-- (Nos encontramos Aca)
-
 - Continuar sobre el proyecto que has trabajado para tu ecommerce y configurar los siguientes elementos:
 - Agregar el modelo de persistencia de Mongo y mongoose a tu proyecto. ✔️
 - Crear una base de datos llamada “ecommerce” dentro de tu Atlas, crear sus colecciones “carts”, “messages”, “products” y sus respectivos schemas. (falta crear schemas de message y carts) ✔️
@@ -47,6 +45,31 @@ Contener todos los Managers (FileSystem y DB) en una carpeta llamada “Dao” �
 - NO ELIMINAR FileSystem de tu proyecto. ✔️
 - Implementar una vista nueva en handlebars llamada chat.handlebars, la cual permita implementar un chat como el visto en clase. Los mensajes deberán guardarse en una colección “messages” en mongo (no es necesario implementarlo en FileSystem). El formato es:  {user:correoDelUsuario, message: mensaje del usuario}✔️
 - Corroborar la integridad del proyecto para que todo funcione como lo ha hecho hasta ahora.✔️
+## (Nos encontramos aca )
+- Tendrás definidos todos los endpoints para poder trabajar con productos y carritos.
+- Profesionalizar las consultas de productos con filtros, paginación y ordenamientos
+- Profesionalizar la gestión de carrito para implementar los últimos conceptos vistos.
+- Permitir comentarios en el archivo
+- La lógica del negocio que ya tienes hecha no debería cambiar, sólo su persistencia. 
+- Los nuevos endpoints deben seguir la misma estructura y lógica que hemos seguido. 
+### Se debe entregar
+- Con base en nuestra implementación actual de productos, modificar el método GET / para que cumpla con los siguientes puntos:
+- Deberá poder recibir por query params un limit (opcional), una page (opcional), un sort (opcional) y un query (opcional)
+- limit permitirá devolver sólo el número de elementos solicitados al momento de la petición, en caso de no recibir limit, éste será de 10.
+- page permitirá devolver la página que queremos buscar, en caso de no recibir page, ésta será de 1
+- query, el tipo de elemento que quiero buscar (es decir, qué filtro aplicar), en caso de no recibir query, realizar la búsqueda general
+  sort: asc/desc, para realizar ordenamiento ascendente o descendente por precio, en caso de no recibir sort, no realizar ningún ordenamiento
+- Se deberá poder buscar productos por categoría o por disponibilidad, y se deberá poder realizar un ordenamiento de estos productos de manera ascendente o descendente por precio.
+- Además, agregar al router de carts los siguientes endpoints:
+  DELETE api/carts/:cid/products/:pid deberá eliminar del carrito el producto seleccionado.
+  PUT api/carts/:cid deberá actualizar el carrito con un arreglo de productos con el formato especificado arriba.
+  PUT api/carts/:cid/products/:pid deberá poder actualizar SÓLO la cantidad de ejemplares del producto por cualquier cantidad pasada desde req.body
+- DELETE api/carts/:cid deberá eliminar todos los productos del carrito 
+  Esta vez, para el modelo de Carts, en su propiedad products, el id de cada producto generado dentro del array tiene que hacer referencia al modelo de Products. Modificar la ruta /:cid para que al traer todos los productos, los traiga completos mediante un “populate”. De esta manera almacenamos sólo el Id, pero al solicitarlo podemos desglosar los productos asociados.
+- Crear una vista en el router de views ‘/products’ para visualizar todos los productos con su respectiva paginación. Cada producto mostrado puede resolverse de    dos formas:
+  Llevar a una nueva vista con el producto seleccionado con su descripción completa, detalles de precio, categoría, etc. Además de un botón para agregar al carrito.
+  Contar con el botón de “agregar al carrito” directamente, sin necesidad de abrir una página adicional con los detalles del producto.
+Además, agregar una vista en ‘/carts/:cid (cartId) para visualizar un carrito específico, donde se deberán listar SOLO los productos que pertenezcan a dicho carrito. 
 
 > Espero que Los ejercicios se encuentren
 > resueltos de buena forma y espero 
