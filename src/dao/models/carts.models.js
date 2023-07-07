@@ -4,18 +4,21 @@ const { Schema, model, Types } = mongoose;
 
 const cartsCollection = 'carts';
 
-const cartItemSchema = new Schema({
-  products: [
-    {
-      type: Types.ObjectId,
-      ref: 'products',
+const cartItemSchema = new Schema(
+  {
+    products: [
+      {
+        type: Types.ObjectId,
+        ref: 'products',
+      },
+    ],
+    quantity: {
+      type: Number,
+      required: true,
     },
-  ],
-  quantity: {
-    type: Number,
-    required: true,
   },
-});
+  { default: [] },
+);
 
 const cartSchema = new Schema({
   products: [cartItemSchema],

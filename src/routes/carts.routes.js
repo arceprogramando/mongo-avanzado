@@ -57,7 +57,7 @@ router.post('/api/carts/:cid/product/:pid', async (req, res) => {
 router.get('/api/carts', async (req, res) => {
   try {
     const { limit } = req.query;
-    let query = CartModel.find();
+    let query = CartModel.find({});
 
     if (limit) {
       query = query.limit(parseInt(limit, 10));

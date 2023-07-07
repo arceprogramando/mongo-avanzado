@@ -28,41 +28,56 @@ const router = Router();
 //   }
 // });
 
-router.post('/api/products', uploadMiddleware, async (req, res) => {
+router.get('/api/products', async (req, res) => {
   try {
     const {
-      title, description, code, price, status, stock, category,
-    } = req.body;
-    let thumbnails = null;
+      limit, page = 1, sort, query,
+    } = req.query;
 
-    if (req.file) {
-      thumbnails = `/upload/${req.file.filename}`;
+    // Aplicar filtros de búsqueda si se proporciona el parámetro 'query'
+    let filter = {};
+    if (query) {
+      filter = { category: query }; // Modifica esto según tus necesidades de búsqueda
     }
 
-    if (!(title && description && code && price && status && stock && category && thumbnails)) {
-      return res.status(400).json({
-        error: 'Todos los campos son requeridos',
-      });
+    // Aplicar ordenamiento si se proporciona el parámetro 'sort'
+    let sortOption = {};
+    if (sort === 'asc') {
+      sortOption = { price: 1 };
+    } else if (sort === 'desc') {
+      sortOption = { price: -1 };
     }
 
-    const product = {
-      title,
-      description,
-      code,
-      price,
-      status,
-      stock,
-      category,
-      thumbnails,
-    };
+    const totalCount = await productModel.countDocuments(filter);
+    const totalPages = Math.ceil(totalCount / limit);
 
-    const createdProduct = await productModel.create(product);
+    const products = await productModel
+      .find(filter)
+      .sort(sortOption)
+      .skip((page - 1) * limit)
+      .limit(parseInt(limit, 10));
 
-    return res.send({ status: 'success', payload: createdProduct });
+    const hasPrevPage = page > 1;
+    const hasNextPage = page < totalPages;
+    const prevLink = hasPrevPage ? `/api/products?limit=${limit}&page=${page - 1}` : null;
+    const nextLink = hasNextPage ? `/api/products?limit=${limit}&page=${page + 1}` : null;
+
+    return res.json({
+      status: 'success',
+      payload: products,
+      totalPages,
+      prevPage: hasPrevPage ? page - 1 : null,
+      nextPage: hasNextPage ? page + 1 : null,
+      page,
+      hasPrevPage,
+      hasNextPage,
+      prevLink,
+      nextLink,
+    });
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.log(`No se ha podido crear los productos desde mongoose: ${error}`);
-    return res.status(500).send({ status: 'error', error: 'Internal server error' });
+    console.log(`Error al obtener los productos: ${error}`);
+    return res.status(500).json({ status: 'error', error: 'Error interno del servidor' });
   }
 });
 
