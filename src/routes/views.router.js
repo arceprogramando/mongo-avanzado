@@ -18,11 +18,25 @@ router.get('/', async (req, res) => {
 
 router.get('/realtimeproducts', async (req, res) => {
   try {
-    const { page = 1, limit = 10 } = req.query;
+    const { page = 1, limit = 10, sort } = req.query;
+
+    const query = {};
+
+    if (req.query.query) {
+      query.title = { $regex: req.query.query, $options: 'i' };
+    }
+
+    const options = { page, limit, lean: true };
+
+    if (sort === 'asc') {
+      options.sort = { price: 1 };
+    } else if (sort === 'desc') {
+      options.sort = { price: -1 };
+    }
 
     const {
       docs, hasPrevPage, hasNextPage, nextPage, prevPage,
-    } = await productModel.paginate({}, { limit, page, lean: true });
+    } = await productModel.paginate(query, options);
 
     res.render('realTimeProducts', {
       products: docs,

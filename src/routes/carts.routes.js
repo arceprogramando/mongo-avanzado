@@ -20,7 +20,7 @@ router.post('/api/carts', async (req, res) => {
     const createdCart = await newCart.save();
     return res.status(201).json({ status: 'success', cart: createdCart });
   } catch (error) {
-    return res.status(500).json({ error: 'Error al crear la Cart' });
+    return res.status(500).json({ error: 'Error al crear el carrito' });
   }
 });
 
