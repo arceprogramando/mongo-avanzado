@@ -9,8 +9,6 @@ const { PORT } = configObject;
 router.get('/', async (req, res) => {
   const findproducts = await productModel.find();
   const products = findproducts.map((product) => product.toObject());
-  // eslint-disable-next-line no-console
-  console.log(products);
   res.render('home', {
     products,
     style: 'index.css',
@@ -50,7 +48,7 @@ router.get('/chat', async (req, res) => {
       style: 'index.css',
     });
   } catch (error) {
-    res.status(500).json({ error: 'Error al obtener los productos' });
+    res.status(500).json({ error: 'Error al obtener los mensajes' });
   }
 });
 export default router;
