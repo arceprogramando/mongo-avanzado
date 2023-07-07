@@ -20,12 +20,22 @@ router.get('/', async (req, res) => {
 
 router.get('/realtimeproducts', async (req, res) => {
   try {
-    const findproducts = await productModel.find();
-    const products = findproducts.map((product) => product.toObject());
+    const { page = 1 } = req.query;
+
+    const {
+      docs, hasPrevPage, hasNextPage, nextPage, prevPage,
+    } = await productModel.paginate({}, { limit: 10, page, lean: true });
+
     // Aqui envio mis products
+
     res.render('realTimeProducts', {
-      products,
+      products: docs,
       style: 'index.css',
+      page,
+      hasPrevPage,
+      hasNextPage,
+      prevPage,
+      nextPage,
     });
   } catch (error) {
     res.status(500).json({ error: 'Error al obtener los productos' });
