@@ -103,8 +103,7 @@ router.get('/api/products', async (req, res) => {
 
 router.get('/api/products/:pid', async (req, res) => {
   try {
-    const { pid } = req.params;
-    const product = await productModel.findById(pid);
+    const product = await productModel.findById({ _id: req.params.pid });
 
     if (product) {
       res.status(200).json(product);
