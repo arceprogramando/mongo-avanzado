@@ -174,13 +174,13 @@ router.delete('/api/products/:pid', async (req, res) => {
   try {
     const { pid } = req.params;
 
-    const product = await productModel.findById(pid);
+    const product = await productModel.findById({ _id: pid });
 
     if (!product) {
       return res.status(404).json({ error: 'El producto no existe' });
     }
 
-    await productModel.findByIdAndDelete(pid);
+    await productModel.findByIdAndDelete({ _id: pid });
 
     return res.status(200).json({ status: 'success', message: 'Producto eliminado correctamente' });
   } catch (error) {
