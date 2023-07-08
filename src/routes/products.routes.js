@@ -34,13 +34,11 @@ router.get('/api/products', async (req, res) => {
       limit, page = 1, sort, query,
     } = req.query;
 
-    // Aplicar filtros de búsqueda si se proporciona el parámetro 'query'
     let filter = {};
     if (query) {
-      filter = { category: query }; // Modifica esto según tus necesidades de búsqueda
+      filter = { category: query };
     }
 
-    // Aplicar ordenamiento si se proporciona el parámetro 'sort'
     let sortOption = {};
     if (sort === 'asc') {
       sortOption = { price: 1 };

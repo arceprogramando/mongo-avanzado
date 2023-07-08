@@ -35,7 +35,7 @@ router.post('/api/chat', async (req, res) => {
 
 router.get('/api/chat', async (req, res) => {
   try {
-    const findmessage = await messageModel.find();
+    const findmessage = await messageModel.find({});
     const messages = findmessage.map((message) => message.toObject());
     // Aquí envío mis mensajes
     res.render('chat', {
