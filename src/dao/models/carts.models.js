@@ -10,6 +10,7 @@ const cartItemSchema = new Schema(
       {
         type: Types.ObjectId,
         ref: 'products',
+        // Con index: true podria indexarlo
       },
     ],
     quantity: {

@@ -7,6 +7,7 @@ const productsSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
+    // Con index: true podria indexarlo
   },
   description: String,
   code: String,
