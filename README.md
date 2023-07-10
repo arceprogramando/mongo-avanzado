@@ -46,20 +46,21 @@ Contener todos los Managers (FileSystem y DB) en una carpeta llamada “Dao” �
 - Implementar una vista nueva en handlebars llamada chat.handlebars, la cual permita implementar un chat como el visto en clase. Los mensajes deberán guardarse en una colección “messages” en mongo (no es necesario implementarlo en FileSystem). El formato es:  {user:correoDelUsuario, message: mensaje del usuario}✔️
 - Corroborar la integridad del proyecto para que todo funcione como lo ha hecho hasta ahora.✔️
 ## (Nos encontramos aca )
-- Tendrás definidos todos los endpoints para poder trabajar con productos y carritos.
-- Profesionalizar las consultas de productos con filtros, paginación y ordenamientos
-- Profesionalizar la gestión de carrito para implementar los últimos conceptos vistos.
+- Tendrás definidos todos los endpoints para poder trabajar con productos y carritos.✔️
+- Profesionalizar las consultas de productos con filtros, paginación y ordenamientos ✔️
+- Profesionalizar la gestión de carrito para implementar los últimos conceptos vistos.✔️
 - Permitir comentarios en el archivo
 - La lógica del negocio que ya tienes hecha no debería cambiar, sólo su persistencia. 
-- Los nuevos endpoints deben seguir la misma estructura y lógica que hemos seguido. 
+- Los nuevos endpoints deben seguir la misma estructura y lógica que hemos seguido. ✔️
 ### Se debe entregar
 - Con base en nuestra implementación actual de productos, modificar el método GET / para que cumpla con los siguientes puntos:
-- Deberá poder recibir por query params un limit (opcional), una page (opcional), un sort (opcional) y un query (opcional)
-- limit permitirá devolver sólo el número de elementos solicitados al momento de la petición, en caso de no recibir limit, éste será de 10.
-- page permitirá devolver la página que queremos buscar, en caso de no recibir page, ésta será de 1
-- query, el tipo de elemento que quiero buscar (es decir, qué filtro aplicar), en caso de no recibir query, realizar la búsqueda general
-  sort: asc/desc, para realizar ordenamiento ascendente o descendente por precio, en caso de no recibir sort, no realizar ningún ordenamiento
-- Se deberá poder buscar productos por categoría o por disponibilidad, y se deberá poder realizar un ordenamiento de estos productos de manera ascendente o descendente por precio.
+- Deberá poder recibir por query params un limit (opcional), una page (opcional), un sort (opcional) y un query (opcional) ✔️
+- limit permitirá devolver sólo el número de elementos solicitados al momento de la petición, en caso de no recibir limit, éste será de 10. ✔️
+- page permitirá devolver la página que queremos buscar, en caso de no recibir page, ésta será de 1 ✔️
+- query, el tipo de elemento que quiero buscar (es decir, qué filtro aplicar), en caso de no recibir query, realizar la búsqueda general ✔️
+  sort: asc/desc, para realizar ordenamiento ascendente o descendente por precio, en caso de no recibir sort, no realizar ningún ordenamiento ✔️
+- Se deberá poder buscar productos por categoría o por disponibilidad, y se deberá poder realizar un ordenamiento de estos productos de manera ascendente o descendente por precio.✔️
+
 - Además, agregar al router de carts los siguientes endpoints:
   DELETE api/carts/:cid/products/:pid deberá eliminar del carrito el producto seleccionado.
   PUT api/carts/:cid deberá actualizar el carrito con un arreglo de productos con el formato especificado arriba.
