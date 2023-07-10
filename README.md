@@ -208,9 +208,14 @@ npm install express-routemap
 para la segunda preentrega se agrego [mongoose-paginate-v2](https://www.npmjs.com/package/mongoose-paginate-v2)
 ```
 http://localhost:8080/
-http://localhost:8080/products
-[http://localhost:8080/products?limit=n]
-http://localhost:8080/products/:id
+http://localhost:8080/realtimeproducts
+http://localhost:8080/chat
+http://localhost:8080/api/products
+http://localhost:8080/api/products/:id
+[http://localhost:8080/api/products?limit=n?sort="asc"|"desc"?page=n]
+http://localhost:8080/api/carts
+http://localhost:8080/api/carts/:cid/product/:pid 
+http://localhost:8080/api/carts/:cid
 ```
 
 
