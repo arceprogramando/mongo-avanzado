@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import productModel from '../dao/models/products.models.js';
-import configObject from '../config/config.js';
+import configObject from '../config/configenvironment.js';
 import messageModel from '../dao/models/message.models.js';
 
 const router = Router();
@@ -34,9 +34,8 @@ router.get('/realtimeproducts', async (req, res) => {
       options.sort = { price: -1 };
     }
 
-    const {
-      docs, hasPrevPage, hasNextPage, nextPage, prevPage,
-    } = await productModel.paginate(query, options);
+    const paginate = await productModel.paginate(query, options);
+    const { docs, hasPrevPage, hasNextPage, nextPage, prevPage } = paginate;
 
     res.render('realTimeProducts', {
       products: docs,

@@ -5,7 +5,7 @@ import cors from 'cors';
 import displayRoutes from 'express-routemap';
 import { engine } from 'express-handlebars';
 import { Server } from 'socket.io';
-import configObject from './config/config.js';
+import configObject from './config/configenvironment.js';
 import __dirname from './utils.js';
 import viewsRouter from './routes/views.router.js';
 import productRouter from './routes/products.routes.js';
@@ -31,7 +31,7 @@ app.set('PORT', env.PORT || 8080);
 app.set('NODE_ENV', env.NODE_ENV || 'development');
 
 const server = app.listen(app.get('PORT'), () => {
-// eslint-disable-next-line no-console
+  // eslint-disable-next-line no-console
   console.log(`=Encendido servidor en puerto ${app.get('PORT')}= \n====== http://localhost:${app.get('PORT')}/ =====`);
   // eslint-disable-next-line no-console
   console.log(`==========ENV:${app.get('NODE_ENV')}==========`);
