@@ -1,5 +1,3 @@
-// Server
-
 import express from 'express';
 import cors from 'cors';
 import displayRoutes from 'express-routemap';
@@ -16,7 +14,6 @@ import messageRouter from './routes/message.routes.js';
 const app = express();
 const env = configObject;
 
-// Middleware
 app.use(cors());
 
 app.use(express.static(`${__dirname}/public`));
@@ -31,16 +28,12 @@ app.set('PORT', env.PORT || 8080);
 app.set('NODE_ENV', env.NODE_ENV || 'development');
 
 const server = app.listen(app.get('PORT'), () => {
-  // eslint-disable-next-line no-console
   console.log(`=Encendido servidor en puerto ${app.get('PORT')}= \n====== http://localhost:${app.get('PORT')}/ =====`);
-  // eslint-disable-next-line no-console
   console.log(`==========ENV:${app.get('NODE_ENV')}==========`);
-  // eslint-disable-next-line no-console
   console.log('===============^^^^^===============');
   displayRoutes(app);
+  mongoDBConnection();
 });
-
-mongoDBConnection();
 
 app.use('/', viewsRouter);
 app.use('/', productRouter);
@@ -50,10 +43,8 @@ app.use('/', messageRouter);
 const io = new Server(server);
 
 io.on('connection', (socket) => {
-  // eslint-disable-next-line no-console
   console.log('Saludo desde el servidor');
   socket.on('message', (data) => {
-    // eslint-disable-next-line no-console
     console.log(data);
   });
 });
