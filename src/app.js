@@ -7,7 +7,7 @@ import configObject from './config/configenvironment.js';
 import __dirname from './utils.js';
 import viewsRouter from './routes/views.router.js';
 import productRouter from './routes/products.routes.js';
-import mongoDBConnection from './dao/db/config/mongo.config.js';
+import mongoDBConnection from './config/mongo.config.js';
 import cartRouter from './routes/carts.routes.js';
 import messageRouter from './routes/message.routes.js';
 
