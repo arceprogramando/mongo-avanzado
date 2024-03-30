@@ -13,6 +13,15 @@ class MessageService {
       throw new Error(`Error al crear el mensaje  en el service: ${error.message}`);
     }
   };
+
+  getAllMessages = async () => {
+    try {
+      const getAllMessages = await this.messageDao.getAllMessages();
+      return getAllMessages;
+    } catch (error) {
+      throw new Error(`Error al buscar los mensajes  en el service: ${error.message}`);
+    }
+  };
 }
 
 export default MessageService;

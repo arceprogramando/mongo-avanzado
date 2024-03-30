@@ -25,6 +25,19 @@ class MessageController {
       return res.status(500).json({ error: 'Ocurrió un error al guardar el mensaje' });
     }
   };
+
+  getAllMessages = async (req, res) => {
+    try {
+      const findmessage = await this.messageService.getAllMessages();
+      const messages = findmessage.map((message) => message.toObject());
+      res.render('chat', {
+        messages,
+        style: 'index.css',
+      });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  };
 }
 
 export default MessageController;
