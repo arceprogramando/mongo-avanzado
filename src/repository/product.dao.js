@@ -49,6 +49,15 @@ class ProductDao {
       throw new Error(`Error al actualizar el producto con el id ${pId} en el dao`);
     }
   };
+
+  deleteProduct = async (pId) => {
+    try {
+      const deleteProduct = await this.productModel.findByIdAndDelete(pId);
+      return deleteProduct;
+    } catch (error) {
+      throw new Error(`Error al eliminar el producto con el id ${pId} en el dao`);
+    }
+  };
 }
 
 export default ProductDao;

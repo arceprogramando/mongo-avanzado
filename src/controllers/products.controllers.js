@@ -134,5 +134,15 @@ class ProductController {
       return res.status(500).json({ error: `Error al actualizar el producto ${error.message}` });
     }
   };
+
+  deleteProduct = async (req, res) => {
+    try {
+      const { pId } = req.params;
+      const deleteProduct = await this.productService.deleteProduct(pId);
+      return res.json({ deleteProduct });
+    } catch (error) {
+      return res.status(500).json({ error: `Error al eliminar el producto ${error.message}` });
+    }
+  };
 }
 export default ProductController;
