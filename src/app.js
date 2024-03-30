@@ -38,7 +38,7 @@ const server = app.listen(app.get('PORT'), () => {
 app.use('/', viewsRouter);
 app.use('/api/products', productRouter);
 app.use('/', cartRouter);
-app.use('/', messageRouter);
+app.use('/api/chat', messageRouter);
 
 const io = new Server(server);
 
