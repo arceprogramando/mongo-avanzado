@@ -40,6 +40,15 @@ class ProductService {
       throw new Error(`Error al traer el  producto con el id ${pId} en el service: ${error.message}`);
     }
   };
+
+  updateProduct = async (pId, updatedProductData) => {
+    try {
+      const updateProduct = await this.productDao.updateProduct(pId, updatedProductData);
+      return updateProduct;
+    } catch (error) {
+      throw new Error(`Error al actualizar el producto con el id ${pId} en el service: ${error.message}`);
+    }
+  };
 }
 
 export default ProductService;

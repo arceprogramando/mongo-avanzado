@@ -40,6 +40,15 @@ class ProductDao {
       throw new Error(`Error al traer el producto con el id ${pId} en el dao`);
     }
   };
+
+  updateProduct = async (pId, updatedProductData) => {
+    try {
+      const updateProduct = await this.productModel.findByIdAndUpdate(pId, updatedProductData);
+      return updateProduct;
+    } catch (error) {
+      throw new Error(`Error al actualizar el producto con el id ${pId} en el dao`);
+    }
+  };
 }
 
 export default ProductDao;

@@ -102,5 +102,37 @@ class ProductController {
       return res.status(500).json({ status: 'error', error: error.message });
     }
   };
+
+  updateProduct = async (req, res) => {
+    try {
+      const { pId } = req.params;
+      const { title, description, code, price, status, stock, category } = req.body;
+
+      let thumbnails = null;
+
+      if (req.file) thumbnails = `/src/public/upload/${req.file.filename}`;
+
+      const existingProduct = await this.productService.getProductById(pId);
+
+      if (!existingProduct) return res.status(404).json({ error: 'Producto no encontrado' });
+
+      const updatedProductData = {
+        title: title || existingProduct.title,
+        description: description || existingProduct.description,
+        code: code || existingProduct.code,
+        price: price || existingProduct.price,
+        status: status || existingProduct.status,
+        stock: stock || existingProduct.stock,
+        category: category || existingProduct.category,
+        thumbnails: thumbnails || existingProduct.thumbnails,
+      };
+
+      const updatedProduct = await this.productService.updateProduct(pId, updatedProductData);
+
+      return res.json({ status: 'success', product: updatedProduct });
+    } catch (error) {
+      return res.status(500).json({ error: `Error al actualizar el producto ${error.message}` });
+    }
+  };
 }
 export default ProductController;
