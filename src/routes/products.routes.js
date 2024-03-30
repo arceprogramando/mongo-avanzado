@@ -9,58 +9,7 @@ const productController = new ProductController();
 
 router.post('/', uploadMiddleware, productController.createProduct);
 
-router.get('/', async (req, res) => {
-  try {
-    const { limit, page = 1, sort, query } = req.query;
-
-    let filter = {};
-    if (query) {
-      filter = { category: query };
-    }
-
-    let sortOption = {};
-    if (sort === 'asc') {
-      sortOption = { price: 1 };
-    } else if (sort === 'desc') {
-      sortOption = { price: -1 };
-    }
-
-    let products;
-    if (limit) {
-      products = await productModel
-        .find(filter)
-        .sort(sortOption)
-        .skip((page - 1) * limit)
-        .limit(parseInt(limit, 10));
-    } else {
-      products = await productModel.find(filter).sort(sortOption);
-    }
-
-    const totalCount = await productModel.countDocuments(filter);
-    const totalPages = Math.ceil(totalCount / limit);
-
-    const hasPrevPage = page > 1;
-    const hasNextPage = page < totalPages;
-    const prevLink = hasPrevPage ? `/api/products?limit=${limit}&page=${page - 1}` : null;
-    const nextLink = hasNextPage ? `/api/products?limit=${limit}&page=${page + 1}` : null;
-
-    return res.json({
-      status: 'success',
-      payload: products,
-      totalPages,
-      prevPage: hasPrevPage ? page - 1 : null,
-      nextPage: hasNextPage ? page + 1 : null,
-      page,
-      hasPrevPage,
-      hasNextPage,
-      prevLink,
-      nextLink,
-    });
-  } catch (error) {
-    console.log(`Error al obtener los productos: ${error}`);
-    return res.status(500).json({ status: 'error', error: 'Error interno del servidor' });
-  }
-});
+router.get('/', productController.getAllProduct);
 
 router.get('/:pid', async (req, res) => {
   try {
