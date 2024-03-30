@@ -1,4 +1,4 @@
-import MessageDao from '../repository/message.dao.js';
+import MessageDao from '../dao/message.dao.js';
 
 class MessageService {
   constructor() {
