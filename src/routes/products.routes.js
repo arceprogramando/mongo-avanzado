@@ -1,43 +1,13 @@
 import { Router } from 'express';
 import productModel from '../dao/models/products.models.js';
 import uploadMiddleware from '../services/uploader.js';
+import ProductController from '../controllers/products.controllers.js';
 
 const router = Router();
 
-router.post('/', uploadMiddleware, async (req, res) => {
-  try {
-    const { title, description, code, price, status, stock, category } = req.body;
-    let thumbnails = null;
+const productController = new ProductController();
 
-    if (req.file) {
-      thumbnails = `/upload/${req.file.filename}`;
-    }
-
-    if (!(title && description && code && price && status && stock && category && thumbnails)) {
-      return res.status(400).json({
-        error: 'Todos los campos son requeridos',
-      });
-    }
-
-    const product = {
-      title,
-      description,
-      code,
-      price,
-      status,
-      stock,
-      category,
-      thumbnails,
-    };
-
-    const createdProduct = await productModel.create(product);
-
-    return res.send({ status: 'success', payload: createdProduct });
-  } catch (error) {
-    console.log(`No se ha podido crear los productos desde mongoose: ${error}`);
-    return res.status(500).send({ status: 'error', error: 'Internal server error' });
-  }
-});
+router.post('/', uploadMiddleware, productController.createProduct);
 
 router.get('/', async (req, res) => {
   try {
