@@ -88,5 +88,19 @@ class ProductController {
       return res.status(500).json({ status: 'error', error: error.message });
     }
   };
+
+  getProductById = async (req, res) => {
+    try {
+      const { pId } = req.params;
+
+      const getProductById = await this.productService.getProductById(pId);
+
+      if (!getProductById) return res.status(404).json(`No se encontro el producto con el id ${pId}`);
+
+      return res.json({ getProductById });
+    } catch (error) {
+      return res.status(500).json({ status: 'error', error: error.message });
+    }
+  };
 }
 export default ProductController;
