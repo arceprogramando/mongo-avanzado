@@ -1,4 +1,4 @@
-import MessageModel from './models/message.models.js';
+import MessageModel from '../models/message.models.js';
 
 class MessageDao {
   constructor() {

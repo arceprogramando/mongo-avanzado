@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import productModel from '../dao/models/products.models.js';
+import productModel from '../models/products.models.js';
 import configObject from '../config/configenvironment.js';
-import messageModel from '../dao/models/message.models.js';
+import messageModel from '../models/message.models.js';
 
 const router = Router();
 const { PORT } = configObject;

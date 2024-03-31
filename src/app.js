@@ -8,7 +8,6 @@ import __dirname from './utils.js';
 import viewsRouter from './routes/views.router.js';
 import productRouter from './routes/products.routes.js';
 import mongoDBConnection from './config/mongo.config.js';
-import cartRouter from './routes/carts.routes.js';
 import messageRouter from './routes/message.routes.js';
 
 const app = express();
@@ -37,7 +36,6 @@ const server = app.listen(app.get('PORT'), () => {
 
 app.use('/', viewsRouter);
 app.use('/api/products', productRouter);
-app.use('/api/carts', cartRouter);
 app.use('/api/chat', messageRouter);
 
 const io = new Server(server);
